@@ -132,3 +132,18 @@ def GetOrders(request):
     print(orders)
     context={'profile':profiles,'order':orders}
     return render(request,'order.html',context)
+
+
+@login_required(login_url='login')
+def Accept_Order(request,pk):
+    book = booking.objects.get(pk=pk)
+    book.status='Accept'
+    book.save()
+    return redirect('my-order')
+
+@login_required(login_url='login')
+def Complete_Order(request,pk):
+    book = booking.objects.get(pk=pk)
+    book.status='Completed'
+    book.save()
+    return redirect('my-order')

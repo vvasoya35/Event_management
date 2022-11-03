@@ -5,6 +5,8 @@ import uuid
 from Event_Management import settings
 from django.contrib.auth.models import User
 from users.models import *
+import datetime
+
 # Create your models here.
 class Event_Services(models.Model):
     service_owner=models.ForeignKey(profile,on_delete=models.CASCADE,null=True,blank=True)
@@ -71,3 +73,8 @@ class booking(models.Model):
     status = models.CharField(max_length=200,choices=book_status,default='Processing')
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True,editable=False)
+    
+    @property
+    def Running(self):
+        if end_date < datetime.date.today():
+            status = 'Completed'

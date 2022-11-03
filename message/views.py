@@ -14,12 +14,14 @@ from .forms import messageToForm
 def MessageSendPage(request):
     id = request.user.profile_set.values()[0]['id']
     profiles =profile.objects.get(pk=id)
-    messageRequests = profiles.messages.all()
+    messageRequests = profiles.messageto_set.filter(mess_sender=profiles)
+    # messageRequests1=messageRequests.distinct('mess_sender')
+
     unreadCount = messageRequests.filter(is_read=False).count()
     # messageRequests = set(messageRequests.mess_sender)
     # elif request.GET['get'] == "Recieve":
         # messageRequests = profiles.messages.all()
-    context = {'messageRequests': messageRequests, 'unreadCount': unreadCount}
+    context = {'messageRequests': messageRequests, 'unreadCount': unreadCount,'profile':profiles}
 
     if profiles.role == 'Supplier':
         return render(request,'message.html',context)

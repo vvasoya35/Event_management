@@ -35,3 +35,7 @@ class profile(models.Model):
     
     def __str__(self):
         return str(self.first_name)
+    
+    @property
+    def user_name(self):
+        username = owner.user.username
