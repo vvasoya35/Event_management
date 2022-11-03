@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="inbox__title">New Messages(<span>{{unreadCount}}</span>)</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Sender</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for message in messageRequests %}
+            
+              {% if message.is_read == False %}
+                <tr class="message font-weight-bold" href="#">
+              {% else %}
+                <tr class="message text-light" href="#">
+                {% endif %}
+                <td>{{message.mess_sender.first_name}}</td>
+                <td>{{message.subject}}</td>
+                <td>{{message.created}}</td>
+              </tr>
+            
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

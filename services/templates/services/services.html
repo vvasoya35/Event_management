@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% block content %}
+{% comment %} 
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css'%}">
+{% endblock css %} {% endcomment %}
+
+<a href="{% url 'add-services' %}">
+  <button type="button" class="btn btn-gradient-primary btn-icon-text mb-2" >
+    <i class="mdi mdi-library-plus btn-icon-prepend"></i>
+    Add Service
+  </button>
+</a>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Your Services</h4>
+        {% comment %} <p class="card-description"> Add class <code>.table-hover</code> {% endcomment %}
+        </p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Edit</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            {% for service in services %}
+                <tr>
+                <td>{{service.service_name}}</td>
+                <td>{{service.category}}</td>
+                <td class="text"> {{service.service_description|slice:"30"}}</td>
+                <td class="text"> ₹{{service.price}}/-</td>
+                <td><label class="badge"><img src="{{service.featured_image.url}}"></img></label></td>
+                <td>
+                    <a href="{% url 'update-services' pk=service.id %}">
+                        <button type="button" class="btn btn-gradient-info btn-icon" style="width: 25px; height: 25px;">
+                            <i class="mdi mdi-pencil-box"></i>
+                          </button>
+                    </a>
+                    <a href="{% url 'delete-services' pk=service.id %}">
+                        <button type="button" class="btn btn-gradient-danger btn-icon" style="width: 25px;height: 25px;">
+                            <i class="mdi mdi-delete"></i>
+                          </button>
+                    </a>
+                </td>
+                </tr>
+            {% endfor %}
+            
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock content %}

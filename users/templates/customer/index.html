@@ -1,0 +1,47 @@
+{% extends 'customer/nav.html' %}
+
+{% block content %}
+
+
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Featured Services</h1>
+                    <p>
+                        Find Best Services In Your Locations
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+
+                {% for service in service %}
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="{% url 'service-page' pk=service.id %}">
+                            <img src="{{service.featured_image.url}}" class="card-img-top" alt="{{service.service_name}}">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                
+                                <li class="text-muted text-right">Psositive:{{service.vote_ratio}}</li>
+                                <li class="text-muted text-right">{{service.service_owner.shop_name}}</li>
+                            </ul>
+                            <a href="{% url 'service-page' pk=service.id %}" class="h2 text-decoration-none text-dark">{{service.service_name}}</a>
+                            <p class="card-text">
+                                {{service.service_description|slice:50}}...
+                            </p>
+                            <p class="text-muted">Reviews(24)</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                
+            </div>
+        </div>
+    </section>
+    <!-- End Featured Product -->
+
+{% endblock content %}

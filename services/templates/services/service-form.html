@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        {% comment %} <h4 class="card-title">Basic form elements</h4>
+        <p class="card-description"> Basic form elements </p> {% endcomment %}
+        <form class="forms-sample" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="form-group">
+            <label for="service_name">{{form.service_name.label}}</label>
+            {{form.service_name}}
+          </div>
+          <div class="form-group">
+            <label for="Service_description">{{form.service_description.label}}</label>
+            {{form.service_description}}
+          </div>
+          <div class="form-group">
+            <label for="Category">{{form.category.label}}</label>
+            {{form.category}}
+          </div>
+          <div class="form-group">
+            <label for="Service_description">{{form.price.label}}</label>
+            {{form.price}}
+          </div>
+          <div class="form-group">
+            <label>{{form.featured_image.label}}</label><br />
+            {{form.featured_image}}
+          </div>
+          <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+          {% comment %} <button class="btn btn-light">Cancel</button> {% endcomment %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'customer/nav.html' %}
+
+{% block content %}
+
+<main class="inbox my-xl my-5 container">
+    <div class="content-box">
+      <h3 class="inbox__title">New Messages(<span>{{unreadCount}}</span>)</h3>
+  
+      <div class=" table-responsive">
+        <table class="table table-hover table">
+        <caption>List of users</caption>
+        <thead>
+          <tr>
+            <th scope="col">Sender</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for message in messageRequests %}
+          
+            {% if message.is_read == False %}
+              <tr class="message font-weight-bold" href="#">
+            {% else %}
+              <tr class="message text-light" href="#">
+              {% endif %}
+              <td>{{message.mess_sender.first_name}}</td>
+              <td>{{message.subject}}</td>
+              <td>{{message.created}}</td>
+            </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+
+
+      <ul class="messages">
+        {% for message in messageRequests %}
+        {% if message.is_read == False %}
+        <li class="message text-dark">
+          {% else %}
+        <li class="message">
+          {% endif %}
+  
+          <a href="">
+            <span class="message__author">{{message.mess_sender.first_name}}</span>
+            <span class="message__subject">{{message.subject}}</span>
+            <span class="message__date">{{message.created}}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+  
+{% endblock content %}

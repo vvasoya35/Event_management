@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="col-md-6 m-auto grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Are You Sure</h4>
+          <p class="card-description"> Do you want to delete it? </p>
+          <form class="forms-sample" action="" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-gradient-danger me-2">Delete</button>
+              <button type="button" class="btn btn-light" onclick="history.back()" href="{{request.GET.next}}">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

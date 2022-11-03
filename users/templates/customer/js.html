@@ -1,0 +1,48 @@
+{% load static %}
+    <script src="{% static 'cus/assets/js/jquery-1.11.0.min.js'%}"></script>
+    <script src="{% static 'cus/assets/js/jquery-migrate-1.2.1.min.js'%}"></script>
+    <script src="{% static 'cus/assets/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'cus/assets/js/templatemo.js'%}"></script>
+    <script src="{% static 'cus/assets/js/custom.js'%}"></script>
+
+    {% comment %} <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> {% endcomment %}
+{% comment %} 
+    <script>
+    //window.onload = initDate();
+
+
+    setTimeout(function(){initDate()},100)
+          function initDate(){
+            $(".datepicker").datepicker({dateFormat:'yy-mm-dd'});
+            $('.timepicker').timepicker({});
+            $('.datetimepicker').datetimepicker();
+          };
+
+    </script> {% endcomment %}
+
+
+    <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+    
+    <script id="django-admin-form-add-constants"
+    src="{% static 'admin/js/change_form.js'%}"
+    
+    async>
+   </script>
+   
+   
+   
+   
+   <script id="django-admin-prepopulated-fields-constants"
+   src="{% static 'admin/js/prepopulate_init.js'%}"
+   data-prepopulated-fields="[]">
+   </script>
+    {% if serviceBookForm %}
+{{ serviceBookForm.media }}
+{% endif %}

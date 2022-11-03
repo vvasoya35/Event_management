@@ -1,0 +1,8 @@
+/*
+Custom Css
+*/
+.card-img, .card-img-bottom, .card-img-top{
+    width: 100%!important;
+    height: 15rem!important;
+    object-fit: cover!important;
+}
