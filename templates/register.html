@@ -9,6 +9,7 @@
     <!-- plugins:css -->
     {% include 'css.html' %}
   </head>
+
   <body>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -26,12 +27,11 @@
                     {% for form in form %}
                     <div class="form-group">
                         {{form}}
+                        {{ form.errors.as_ul }}
                         {% if form.help_text %}
                           {{form.help_text}}
                         {% endif %}
-                        {% if form.error %}
-                          {{form.error}}
-                        {% endif %}
+                        
                     </div>
                     {% endfor %}
                   

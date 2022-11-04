@@ -78,6 +78,14 @@ def RegisterUser(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            
+            # try:
+            #     user = User.objects.get(username=form.username)
+            #     messages.error(request,'User Already exist')
+            # except:
+            #     messages.error(request,'User dose not exist')
+            
+            
             user.username = user.username.lower()
             user.save()
             form2 = profile.objects.create(owner=user,first_name=request.POST['first_name'],email=request.POST['email'],username=request.POST['username'])
@@ -103,6 +111,8 @@ def userAccount(request):
             form = ServiceProviderForm(request.POST,request.FILES,instance=pro)
             if form.is_valid():
                 form.save()
+                pro.username = request.user.profile_set.values()[0]['username']
+                pro.save()
         context={'profile':pro,
                 'form':form,
                 }
@@ -113,6 +123,8 @@ def userAccount(request):
             form = CustomerForm(request.POST,request.FILES,instance=pro)
             if form.is_valid():
                 form.save()
+                pro.username = request.user.profile_set.values()[0]['username']
+                pro.save()
         context={'profile':pro,
                 'form':form,
                 }
