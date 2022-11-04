@@ -36,7 +36,7 @@ def MessageReceivePage(request):
     messageRequests = profiles.messageto_set.filter(mess_receiver=profiles)
 
     unreadCount = messageRequests.filter(is_read=False).count()
-    context = {'messageRequests': messageRequests, 'unreadCount': unreadCount}
+    context = {'messageRequests': messageRequests, 'unreadCount': unreadCount,'profile':profiles}
     
     if profiles.role == 'Supplier':
         return render(request,'message.html',context)

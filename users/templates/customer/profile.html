@@ -1,0 +1,20 @@
+{% extends 'customer/nav.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row py-5">
+        <h4 class="card-title">My Account</h4>
+        <form class="form-sample" method="POST" enctype="multipart/form-data" action="">
+          {% csrf_token %}
+          <p class="card-description"> Personal info </p>
+          {{form}}
+          <div class="row">
+            <div class="col text-end mt-2">
+                <button type="submit" class="btn btn-success btn-lg px-3">Update</button>
+            </div>
+        </div>
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -23,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomerForm(ModelForm):
     class Meta:
         model = profile
-        fields = ['first_name','last_name','profile_image','location','Address']
+        fields = ['first_name','last_name','username','profile_image','location','Address']
     
     
     def __init__(self,*args, **kwargs):

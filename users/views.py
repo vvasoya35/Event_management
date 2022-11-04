@@ -43,7 +43,7 @@ def ServicePage(request,pk):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('my-account')
     
     if request.method=='POST':
         username = request.POST['username'].lower()
@@ -60,7 +60,7 @@ def loginPage(request):
             login(request, user)
             # return redirect('services')
             
-            return redirect(request.GET['next'] if 'next' in request.GET else 'services')
+            return redirect(request.GET['next'] if 'next' in request.GET else 'my-account')
         else:
             messages.error(request,'Username or password is incorrect')
             return render(request,'login.html')
@@ -71,7 +71,7 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-def RegisterSupplier(request):
+def RegisterUser(request):
     page = 'register'
     form = CustomUserCreationForm()
     if request.method =="POST":
@@ -80,7 +80,7 @@ def RegisterSupplier(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            form2 = profile.objects.create(owner=user,first_name=request.POST['first_name'],email=request.POST['email'])
+            form2 = profile.objects.create(owner=user,first_name=request.POST['first_name'],email=request.POST['email'],username=request.POST['username'])
             form2.save()
             
             return redirect('login')
@@ -95,17 +95,28 @@ def userAccount(request):
     profiles = request.user.profile_set.values()[0]['id']
     pro = profile.objects.get(id =profiles)
     # services = profiles.event_services_set.all()
-    form = ServiceProviderForm(instance=pro)
-    if request.method == "POST":
-        form = ServiceProviderForm(request.POST,request.FILES,instance=pro)
-        if form.is_valid():
-            form.save()
     
     
-    context={'profile':pro,
-             'form':form,
-             }
-    return render(request,'user/my-account.html',context)
+    if pro.role == 'Supplier':
+        form = ServiceProviderForm(instance=pro)
+        if request.method == "POST":
+            form = ServiceProviderForm(request.POST,request.FILES,instance=pro)
+            if form.is_valid():
+                form.save()
+        context={'profile':pro,
+                'form':form,
+                }
+        return render(request,'user/my-account.html',context)
+    else:
+        form = CustomerForm(instance=pro)
+        if request.method == "POST":
+            form = CustomerForm(request.POST,request.FILES,instance=pro)
+            if form.is_valid():
+                form.save()
+        context={'profile':pro,
+                'form':form,
+                }
+        return render (request,'customer/profile.html',context)
 
 @login_required(login_url='login')
 def editAccount(request):
@@ -147,3 +158,9 @@ def Complete_Order(request,pk):
     book.status='Completed'
     book.save()
     return redirect('my-order')
+
+@login_required(login_url='login')
+def Profile_page(request):
+    
+    context={}
+    return render(request,'profile.html',context)

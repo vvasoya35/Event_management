@@ -29,6 +29,9 @@
                         {% if form.help_text %}
                           {{form.help_text}}
                         {% endif %}
+                        {% if form.error %}
+                          {{form.error}}
+                        {% endif %}
                     </div>
                     {% endfor %}
                   
